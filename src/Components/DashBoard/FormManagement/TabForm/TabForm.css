@@ -1,0 +1,23 @@
+.multi-tab-container {
+    padding: 25px;
+    margin-top: 50px;
+}
+.error-message {
+    font-size: 12px;
+    color: red;
+}
+
+.tab-form-submit,
+.tab-form-submit:hover, .tab-form-submit:focus {
+    background-color: rgb(28, 219, 188);
+    border: rgb(28, 219, 188);
+    color: #ffffff;
+}
+.tab-form-data{
+    margin-bottom: 5rem;
+}
+@media (max-width: 768px) {
+    .multi-tab-container {
+        margin-top: unset;
+    }
+}

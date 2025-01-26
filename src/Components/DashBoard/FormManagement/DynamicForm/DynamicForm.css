@@ -1,0 +1,24 @@
+.dynamic-form-div {
+    margin-bottom: 2rem;
+}
+.dynamic-form-data{
+    margin-bottom: 5rem;
+}
+.invalid-feedback {
+    font-size: 12px;
+    text-align: left;
+    display: block;
+}
+.sumbit-dynamic-button,
+.sumbit-dynamic-button:hover,
+.sumbit-dynamic-button:focus {
+    background-color: rgb(28, 219, 188);
+    border: rgb(28, 219, 188);
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .health-form{
+        margin-bottom: 5rem;
+    }
+}

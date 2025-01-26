@@ -1,25 +1,43 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+const Signup = React.lazy(() => import('./Components/Signup/Signup'));
+const Login = React.lazy(() => import('./Components/Login/Login'));
+const DashBoard = React.lazy(() => import('./Components/DashBoard/DashBoard'));
+const AppLayout = React.lazy(() => import('./Components/AppLayout/AppLayout'));
+const HealthForm = React.lazy(() =>
+    import('./Components/DashBoard/FormManagement/HealthForm/HealthForm')
+);
+const TabForm = React.lazy(() =>
+    import('./Components/DashBoard/FormManagement/TabForm/TabForm')
+);
+const DynamicForm = React.lazy(() => import('./Components/DashBoard/FormManagement/DynamicForm/DynamicForm'));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Nilotpal.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <HashRouter>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route
+                    element={
+                        <React.Suspense fallback={null}>
+                            <AppLayout />
+                        </React.Suspense>
+                    }
+                >
+                    <Route path="dashboard">
+                        <Route index element={<DashBoard />} />
+                        <Route path="1" element={<HealthForm />} />
+                        <Route path="2" element={<TabForm />} />
+                        <Route path="3" element={<Login />} />
+                        <Route path="4" element={<Signup />} />
+                        <Route path="5" element={<DynamicForm />}/>
+                    </Route>
+                </Route>
+            </Routes>
+        </HashRouter>
+    );
 }
 
 export default App;

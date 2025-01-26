@@ -1,0 +1,14 @@
+.Footer-div{
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    box-shadow: 0 -0.5rem 3rem rgba(0, 0, 0, .15) !important;
+    background-color: #ffffff;
+}
+
+.link-tag{
+    text-decoration: none;
+    color: #111111 !important;
+}

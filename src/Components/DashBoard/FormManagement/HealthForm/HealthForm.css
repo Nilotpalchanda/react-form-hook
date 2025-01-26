@@ -1,0 +1,31 @@
+.submit-hf {
+    width: 100%;
+}
+.invalid-feedback {
+    font-size: 12px;
+    text-align: left;
+    display: block;
+}
+.custom-radio .custom-control-input {
+    margin-right: 5px;
+}
+.mailing-adress-actions, .action-btn{
+    text-align: end;
+}
+.submit-hf,
+.submit-hf:hover, .submit-hf:focus {
+    background-color: rgb(28, 219, 188);
+    border: rgb(28, 219, 188);
+    color: #ffffff;
+}
+.health-form{
+    margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+    .health-form{
+        margin-bottom: 5rem;
+    }
+}
+.heath-form-data{
+    margin-bottom: 5rem;
+}
