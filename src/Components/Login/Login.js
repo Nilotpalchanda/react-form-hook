@@ -16,7 +16,6 @@ const schema = yup.object().shape({
 
 const Login = () => {
     const [loginData, setLoginData] = React.useState({});
-    const [hasAccount, setHasAccount] = React.useState(true);
     const [formData, setFormData] = React.useState({});
     const navigate = useNavigate();
     const location = useLocation();
@@ -57,9 +56,7 @@ const Login = () => {
                         emailId: loginData.data.emailId
                     }
                 });
-            } else setHasAccount(false);
-        } else {
-            setHasAccount(false);
+            }
         }
     }
     return (
@@ -109,12 +106,9 @@ const Login = () => {
                     >
                         {isSubmitting ? 'Loading....' : 'Sign in'}
                     </button>
-                    {!hasAccount && (
                         <p className="has-account">
-                            You dont have account with us. Please&nbsp;
-                            <Link to={'/signup'}>Sign Up</Link>
+                            Don't have an account?&nbsp;<Link to={'/signup'}>Sign Up</Link>
                         </p>
-                    )}
                 </form>
             </main>
             {Object.keys(formData)?.length > 0 && !isSubmitting && (
