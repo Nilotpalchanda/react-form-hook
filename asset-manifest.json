@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-form-hook/static/css/main.50b78772.css",
-    "main.js": "/react-form-hook/static/js/main.96f505b1.js",
+    "main.js": "/react-form-hook/static/js/main.fa7422a4.js",
     "static/css/115.67334598.chunk.css": "/react-form-hook/static/css/115.67334598.chunk.css",
     "static/js/115.9ee6f2df.chunk.js": "/react-form-hook/static/js/115.9ee6f2df.chunk.js",
     "static/css/886.2d5123de.chunk.css": "/react-form-hook/static/css/886.2d5123de.chunk.css",
@@ -19,7 +19,7 @@
     "static/js/131.2d771254.chunk.js": "/react-form-hook/static/js/131.2d771254.chunk.js",
     "index.html": "/react-form-hook/index.html",
     "main.50b78772.css.map": "/react-form-hook/static/css/main.50b78772.css.map",
-    "main.96f505b1.js.map": "/react-form-hook/static/js/main.96f505b1.js.map",
+    "main.fa7422a4.js.map": "/react-form-hook/static/js/main.fa7422a4.js.map",
     "115.67334598.chunk.css.map": "/react-form-hook/static/css/115.67334598.chunk.css.map",
     "115.9ee6f2df.chunk.js.map": "/react-form-hook/static/js/115.9ee6f2df.chunk.js.map",
     "886.2d5123de.chunk.css.map": "/react-form-hook/static/css/886.2d5123de.chunk.css.map",
@@ -37,6 +37,6 @@
   },
   "entrypoints": [
     "static/css/main.50b78772.css",
-    "static/js/main.96f505b1.js"
+    "static/js/main.fa7422a4.js"
   ]
 }
