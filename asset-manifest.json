@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-form-hook/static/css/main.f855e6bc.css",
+    "main.js": "/react-form-hook/static/js/main.93d3236c.js",
+    "static/js/563.f5d52b29.chunk.js": "/react-form-hook/static/js/563.f5d52b29.chunk.js",
+    "static/media/logo.svg": "/react-form-hook/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/react-form-hook/index.html",
+    "main.f855e6bc.css.map": "/react-form-hook/static/css/main.f855e6bc.css.map",
+    "main.93d3236c.js.map": "/react-form-hook/static/js/main.93d3236c.js.map",
+    "563.f5d52b29.chunk.js.map": "/react-form-hook/static/js/563.f5d52b29.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.93d3236c.js"
+  ]
+}
