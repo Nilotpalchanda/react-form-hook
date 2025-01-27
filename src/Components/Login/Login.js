@@ -44,6 +44,7 @@ const Login = () => {
             start();
             if (intoDashboardLoginForm) {
                 await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+                complete();
                 setFormData(data);
                 return;
             }
