@@ -1,34 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import z from 'zod';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './TabForm.css';
-
-const schema = z.object({
-    // Tab 1 schema
-    firstName: z
-        .string()
-        .min(4, 'Please enter a valid First name')
-        .nonempty('First Name is required'),
-    lastName: z
-        .string()
-        .min(4, 'Please enter a valid Last name')
-        .nonempty('Last Name is required'),
-    // Tab 2 schema
-    email: z.string().email('Invalid Email').nonempty('Email is required'),
-    phone: z.string().regex(/^\d{10}$/, 'Phone number must be 10 digits'),
-    // Tab 3 schema
-    address: z
-        .string()
-        .min(5, 'Please enter a valid address')
-        .nonempty('Address is required'),
-    city: z
-        .string()
-        .min(4, 'Please enter a valid city')
-        .nonempty('City is required')
-});
+import { TabFormSchema } from '../../../../ValidationSchema/ValidationSchema';
 
 const TabForm = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -44,7 +20,7 @@ const TabForm = () => {
         getValues,
         reset
     } = useForm({
-        resolver: zodResolver(schema),
+        resolver: zodResolver(TabFormSchema),
         mode: 'onChange'
     });
 

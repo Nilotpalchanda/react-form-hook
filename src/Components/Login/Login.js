@@ -3,16 +3,7 @@ import './Login.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-const schema = yup.object().shape({
-    emailId: yup.string().email().required('Email is required'),
-    password: yup
-        .string()
-        .matches(/^[0-9]+$/, 'Must be only digits')
-        .min(5, 'Value should be more than 5 digits')
-        .required('Password is required')
-});
+import { LoginSchema } from '../../ValidationSchema/ValidationSchema';
 
 const Login = () => {
     const [loginData, setLoginData] = React.useState({});
@@ -38,7 +29,7 @@ const Login = () => {
         handleSubmit,
         formState: { errors, isSubmitting }
     } = useForm({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(LoginSchema)
     });
 
     async function onSubmitLoginHandler(data) {

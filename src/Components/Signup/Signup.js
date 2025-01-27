@@ -2,37 +2,9 @@ import React from 'react';
 import './Signup.css';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-const schema = z
-    .object({
-        fullName: z.string().nonempty('Full Name is required'),
-        emailId: z
-            .string()
-            .email('Invalid Email')
-            .nonempty('Email is required')
-            .regex(/^[a-z0-9][\w\.]+\@\w+?(\.\w+){1,}$/, 'Invalid Email'),
-        phoneNumber: z
-            .string()
-            .regex(/^[0-9]+$/, 'Must be only digits')
-            .min(10, 'Value should be more than 10 digits')
-            .nonempty('Phone Number is required'),
-        password: z
-            .string()
-            .regex(/^[0-9]+$/, 'Must be only digits')
-            .min(5, 'Value should be more than 5 digits')
-            .nonempty('Password is required'),
-        confirmPassword: z
-            .string()
-            .regex(/^[0-9]+$/, 'Must be only digits')
-            .min(5, 'Value should be more than 5 digits')
-            .nonempty('Password is required')
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: "Passwords don't match",
-        path: ['confirmPassword']
-    });
-    
+import { SignUpSchema } from '../../ValidationSchema/ValidationSchema';
+
 const Signup = () => {
     const [formData, setFormData] = React.useState({});
     const navigate = useNavigate();
@@ -53,7 +25,7 @@ const Signup = () => {
         handleSubmit,
         formState: { errors, isSubmitting }
     } = useForm({
-        resolver: zodResolver(schema)
+        resolver: zodResolver(SignUpSchema)
     });
 
     async function onSubmitHandler(data) {

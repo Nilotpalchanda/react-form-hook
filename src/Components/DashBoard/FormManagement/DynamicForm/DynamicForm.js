@@ -10,6 +10,7 @@ const DynamicForm = () => {
         document.title = 'Dynamic Form with JSON Data';
         document.getElementsByTagName('body')[0].style.display = 'inherit';
         getDynamicFormData().then((res) => setDynamicData(res));
+       
     }, []);
 
     const methods = useForm();

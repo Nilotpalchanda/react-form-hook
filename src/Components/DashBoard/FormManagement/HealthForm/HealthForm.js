@@ -1,27 +1,9 @@
 import React from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import './HealthForm.css';
+import { HealthFormSchema } from '../../../../ValidationSchema/ValidationSchema';
 
-const schema = yup.object().shape({
-    firstName: yup.string().required('First name is required'),
-    lastName: yup.string().required('Last name is required'),
-    dob: yup.date().required('Date of Birth is required'),
-    email: yup
-        .string()
-        .email('Invalid email address')
-        .required('Email address is required'),
-    insurancePlan: yup.string().required('Insurance plan is required'),
-    mailingAddress: yup.array().of(
-        yup.object().shape({
-            streetAddress: yup.string().required('Street Address is required'),
-            city: yup.string().required('City is required'),
-            region: yup.string().required('Region is required'),
-            postalCode: yup.string().required('Postal Code is required')
-        })
-    )
-});
 const HealthForm = () => {
     const [formState, setFormState] = React.useState({});
     React.useEffect(() => {
@@ -37,7 +19,6 @@ const HealthForm = () => {
             { streetAddress: '', city: '', region: '', postalCode: '' }
         ]
     }
-
     const {
         register,
         handleSubmit,
@@ -46,7 +27,7 @@ const HealthForm = () => {
         formState: { errors, isValid, isSubmitting }
     } = useForm({
         defaultValues: {...defaultFormValues},
-        resolver: yupResolver(schema)
+        resolver: yupResolver(HealthFormSchema)
     });
 
     const { fields, append, remove } = useFieldArray({
