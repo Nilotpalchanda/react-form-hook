@@ -44,7 +44,6 @@ const Login = () => {
             start();
             if (intoDashboardLoginForm) {
                 await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-                complete();
                 setFormData(data);
                 return;
             }
@@ -54,7 +53,6 @@ const Login = () => {
                     data.password === loginData.data.password
                 ) {
                     await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-                    complete();
                     navigate('/dashboard', {
                         state: {
                             userName: loginData.data.fullName,
@@ -65,6 +63,7 @@ const Login = () => {
                     setHasAccount(false);
                 }
             }
+            complete();
         } catch (e) {
             console.error('Login onsubmit errror:::', e);
         }
