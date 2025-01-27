@@ -4,12 +4,16 @@ import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpSchema } from '../../ValidationSchema/ValidationSchema';
+import { useLoadingBar } from 'react-top-loading-bar';
 
 const Signup = () => {
     const [formData, setFormData] = React.useState({});
     const navigate = useNavigate();
     const location = useLocation();
-
+    const { start, complete } = useLoadingBar({
+        color: "#1cdbbcd9",
+        height: 6,
+      });
     React.useEffect(() => {
         document.title = 'React Forms Hook Signup';
         if (location.pathname === '/dashboard/5') {
@@ -29,7 +33,9 @@ const Signup = () => {
     });
 
     async function onSubmitHandler(data) {
+        start()
         await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+        complete()
         if (location.pathname === '/dashboard/5') {
             setFormData(data);
             return;

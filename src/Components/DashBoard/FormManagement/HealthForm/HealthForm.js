@@ -3,9 +3,19 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import './HealthForm.css';
 import { HealthFormSchema } from '../../../../ValidationSchema/ValidationSchema';
+import { useLoadingBar } from 'react-top-loading-bar';
 
 const HealthForm = () => {
     const [formState, setFormState] = React.useState({});
+    const [loadingCompleted, setIsLoadingCompleted] = React.useState(false)
+    const { start, complete } = useLoadingBar({
+        color: "#1cdbbcd9",
+        height: 6,
+        onLoaderFinished: function(){
+            setIsLoadingCompleted(true)
+        }
+      });
+
     React.useEffect(() => {
         document.title = 'Health Insurance Enrollment Form with Yup';
     }, []);
@@ -36,7 +46,9 @@ const HealthForm = () => {
     });
 
     async function onSubmit(data) {
+        start()
         await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+        complete()
         setFormState(data);
         reset({...defaultFormValues});
     }
@@ -360,7 +372,7 @@ const HealthForm = () => {
                     </div>
                 </form>
             </div>
-            {Object.keys(formState)?.length > 0 && !isSubmitting && (
+            {Object.keys(formState)?.length > 0 && !isSubmitting && loadingCompleted && (
                 <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 heath-form-data">
                     <h1>Form Data</h1>
                     <pre>{JSON.stringify(formState, null, 2)}</pre>

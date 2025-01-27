@@ -5,10 +5,19 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './TabForm.css';
 import { TabFormSchema } from '../../../../ValidationSchema/ValidationSchema';
+import { useLoadingBar } from 'react-top-loading-bar';
 
 const TabForm = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [formState, setFormState] = React.useState({});
+    const [loadingCompleted, setIsLoadingCompleted] = React.useState(false);
+    const { start, complete } = useLoadingBar({
+        color: '#1cdbbcd9',
+        height: 6,
+        onLoaderFinished: function () {
+            setIsLoadingCompleted(true);
+        }
+    });
     React.useEffect(() => {
         document.title = 'Tab form with zod';
     }, []);
@@ -25,7 +34,9 @@ const TabForm = () => {
     });
 
     async function onSubmit(data) {
+        start();
         await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+        complete();
         setFormState(data);
         reset();
     }
@@ -267,12 +278,14 @@ const TabForm = () => {
                     </TabPanel>
                 </Tabs>
             </div>
-            {Object.keys(formState)?.length > 0 && !isSubmitting && (
-                <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 tab-form-data">
-                    <h1>Form Data</h1>
-                    <pre>{JSON.stringify(formState, null, 2)}</pre>
-                </div>
-            )}
+            {Object.keys(formState)?.length > 0 &&
+                !isSubmitting &&
+                loadingCompleted && (
+                    <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 tab-form-data">
+                        <h1>Form Data</h1>
+                        <pre>{JSON.stringify(formState, null, 2)}</pre>
+                    </div>
+                )}
         </>
     );
 };

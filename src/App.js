@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { HashRouter, Route, Routes } from 'react-router-dom';
+import { LoadingBarContainer } from "react-top-loading-bar";
+
 const Signup = React.lazy(() => import('./Components/Signup/Signup'));
 const Login = React.lazy(() => import('./Components/Login/Login'));
 const DashBoard = React.lazy(() => import('./Components/DashBoard/DashBoard'));

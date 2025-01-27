@@ -2,20 +2,34 @@ import React, { useEffect } from 'react';
 import './DynamicForm.css';
 import { getDynamicFormData, formInputFields } from './DynamicFormData';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { useLoadingBar } from 'react-top-loading-bar';
 
 const DynamicForm = () => {
     const [dynamicData, setDynamicData] = React.useState([]);
     const [formState, setFormState] = React.useState({});
+    const [loadingCompleted, setIsLoadingCompleted] = React.useState(false);
+    const { start, complete } = useLoadingBar({
+        color: '#1cdbbcd9',
+        height: 6,
+        onLoaderFinished: function () {
+            setIsLoadingCompleted(true);
+        }
+    });
     useEffect(() => {
+        start();
         document.title = 'Dynamic Form with JSON Data';
         document.getElementsByTagName('body')[0].style.display = 'inherit';
-        getDynamicFormData().then((res) => setDynamicData(res));
-       
+        getDynamicFormData().then((res) => {
+            complete();
+            setDynamicData(res);
+        });
     }, []);
 
     const methods = useForm();
     const onSubmit = async (data) => {
+        start();
         await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+        complete();
         setFormState(data);
     };
 
@@ -84,7 +98,8 @@ const DynamicForm = () => {
                 </div>
             </div>
             {Object.keys(formState)?.length > 0 &&
-                !methods.formState.isSubmitting && (
+                !methods.formState.isSubmitting &&
+                  (
                     <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 dynamic-form-data">
                         <h1>Dynamic Form Data</h1>
                         <pre>{JSON.stringify(formState, null, 2)}</pre>

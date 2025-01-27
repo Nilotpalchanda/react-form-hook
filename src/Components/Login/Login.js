@@ -4,13 +4,24 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginSchema } from '../../ValidationSchema/ValidationSchema';
+import { useLoadingBar } from 'react-top-loading-bar';
 
 const Login = () => {
     const [loginData, setLoginData] = React.useState({});
     const [formData, setFormData] = React.useState({});
     const [hasAccount, setHasAccount] = React.useState(true);
+    const [loadingCompleted, setIsLoadingCompleted] = React.useState(false);
+
     const navigate = useNavigate();
     const location = useLocation();
+    const { start, complete } = useLoadingBar({
+        color: '#1cdbbcd9',
+        height: 6,
+        onLoaderFinished: function () {
+            setIsLoadingCompleted(true);
+        }
+    });
+
     const intoDashboardLoginForm = location.pathname === '/dashboard/4';
     React.useEffect(() => {
         document.title = 'React Forms Hook Login';
@@ -29,7 +40,10 @@ const Login = () => {
     });
 
     async function onSubmitLoginHandler(data) {
+        start();
         if (intoDashboardLoginForm) {
+            await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+            complete();
             setFormData(data);
             return;
         }
@@ -39,12 +53,14 @@ const Login = () => {
                 data.password === loginData.data.password
             ) {
                 await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-                navigate('/dashboard', {
-                    state: {
-                        userName: loginData.data.fullName,
-                        emailId: loginData.data.emailId
-                    }
-                });
+                complete();
+                loadingCompleted &&
+                    navigate('/dashboard', {
+                        state: {
+                            userName: loginData.data.fullName,
+                            emailId: loginData.data.emailId
+                        }
+                    });
             } else {
                 setHasAccount(false);
             }
@@ -61,7 +77,7 @@ const Login = () => {
                                 type={'email'}
                                 name={'emailId'}
                                 placeholder={'name@example.com'}
-                                headerLabelText={"Email address"}
+                                headerLabelText={'Email address'}
                             />
                         </div>
                         <div className="form-floating mb-2">
@@ -69,7 +85,7 @@ const Login = () => {
                                 type={'password'}
                                 name={'password'}
                                 placeholder={'Password'}
-                                headerLabelText={"Password"}
+                                headerLabelText={'Password'}
                             />
                         </div>
                         <button
