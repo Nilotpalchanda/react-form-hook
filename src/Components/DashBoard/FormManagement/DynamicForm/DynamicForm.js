@@ -27,10 +27,14 @@ const DynamicForm = () => {
 
     const methods = useForm();
     const onSubmit = async (data) => {
-        start();
-        await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-        complete();
-        setFormState(data);
+        try {
+            start();
+            await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+            complete();
+            setFormState(data);
+        } catch (e) {
+            console.error('Dynamic form onsubmit error:::', e);
+        }
     };
 
     const getFiledBasedOnType = (field) => {
@@ -98,8 +102,7 @@ const DynamicForm = () => {
                 </div>
             </div>
             {Object.keys(formState)?.length > 0 &&
-                !methods.formState.isSubmitting &&
-                  (
+                !methods.formState.isSubmitting && (
                     <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 dynamic-form-data">
                         <h1>Dynamic Form Data</h1>
                         <pre>{JSON.stringify(formState, null, 2)}</pre>

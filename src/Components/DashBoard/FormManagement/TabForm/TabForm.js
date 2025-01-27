@@ -34,11 +34,15 @@ const TabForm = () => {
     });
 
     async function onSubmit(data) {
-        start();
-        await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-        complete();
-        setFormState(data);
-        reset();
+        try {
+            start();
+            await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+            complete();
+            setFormState(data);
+            reset();
+        } catch (e) {
+            console.error('Tab form onsubmit error:::', e);
+        }
     }
 
     function handleTabChange(index) {

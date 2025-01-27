@@ -40,29 +40,33 @@ const Login = () => {
     });
 
     async function onSubmitLoginHandler(data) {
-        start();
-        if (intoDashboardLoginForm) {
-            await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-            complete();
-            setFormData(data);
-            return;
-        }
-        if (loginData) {
-            if (
-                data.emailId === loginData.data.emailId &&
-                data.password === loginData.data.password
-            ) {
+        try {
+            start();
+            if (intoDashboardLoginForm) {
                 await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
                 complete();
-                navigate('/dashboard', {
-                    state: {
-                        userName: loginData.data.fullName,
-                        emailId: loginData.data.emailId
-                    }
-                });
-            } else {
-                setHasAccount(false);
+                setFormData(data);
+                return;
             }
+            if (loginData) {
+                if (
+                    data.emailId === loginData.data.emailId &&
+                    data.password === loginData.data.password
+                ) {
+                    await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+                    complete();
+                    navigate('/dashboard', {
+                        state: {
+                            userName: loginData.data.fullName,
+                            emailId: loginData.data.emailId
+                        }
+                    });
+                } else {
+                    setHasAccount(false);
+                }
+            }
+        } catch (e) {
+            console.error('Login onsubmit errror:::', e);
         }
     }
     return (

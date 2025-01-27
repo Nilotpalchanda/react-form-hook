@@ -11,9 +11,9 @@ const Signup = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { start, complete } = useLoadingBar({
-        color: "#1cdbbcd9",
-        height: 6,
-      });
+        color: '#1cdbbcd9',
+        height: 6
+    });
     React.useEffect(() => {
         document.title = 'React Forms Hook Signup';
         if (location.pathname === '/dashboard/5') {
@@ -33,15 +33,19 @@ const Signup = () => {
     });
 
     async function onSubmitHandler(data) {
-        start()
-        await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-        complete()
-        if (location.pathname === '/dashboard/5') {
-            setFormData(data);
-            return;
+        try {
+            start();
+            await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
+            complete();
+            if (location.pathname === '/dashboard/5') {
+                setFormData(data);
+                return;
+            }
+            navigate('/');
+            localStorage.setItem('loginDetails', JSON.stringify({ data }));
+        } catch (e) {
+            console.error('Signup onsubmit error', e);
         }
-        navigate('/');
-        localStorage.setItem('loginDetails', JSON.stringify({ data }));
     }
     return (
         <>
