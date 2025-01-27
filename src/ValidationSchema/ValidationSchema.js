@@ -5,9 +5,9 @@ export const LoginSchema = yup.object().shape({
     emailId: yup.string().email().required('Email is required'),
     password: yup
         .string()
+        .required('Password is required')
         .matches(/^[0-9]+$/, 'Must be only digits')
         .min(5, 'Value should be more than 5 digits')
-        .required('Password is required')
 });
 
 export const SignUpSchema = z
