@@ -1,14 +1,14 @@
 import React from 'react';
 import './Login.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginSchema } from '../../ValidationSchema/ValidationSchema';
 
 const Login = () => {
     const [loginData, setLoginData] = React.useState({});
     const [formData, setFormData] = React.useState({});
-    const [hasAccount, setHasAccount]= React.useState(true)
+    const [hasAccount, setHasAccount] = React.useState(true);
     const navigate = useNavigate();
     const location = useLocation();
     const intoDashboardLoginForm = location.pathname === '/dashboard/4';
@@ -24,11 +24,7 @@ const Login = () => {
         setLoginData(JSON.parse(localStorageData));
     }, []);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting }
-    } = useForm({
+    const methods = useForm({
         resolver: yupResolver(LoginSchema)
     });
 
@@ -49,79 +45,87 @@ const Login = () => {
                         emailId: loginData.data.emailId
                     }
                 });
-            }else {
-                setHasAccount(false)
+            } else {
+                setHasAccount(false);
             }
         }
     }
     return (
         <>
             <main className="form-signin text-center bg-body rounded shadow-lg">
-                <form onSubmit={handleSubmit(onSubmitLoginHandler)}>
-                    <h1 className="h3 mb-3 fw-normal">Login</h1>
-
-                    <div className="form-floating mb-2">
-                        <input
-                            type="email"
-                            className={`form-control ${
-                                errors.emailId ? 'is-invalid' : ''
-                            }`}
-                            id="emailId"
-                            placeholder="name@example.com"
-                            {...register('emailId')}
-                        />
-                        {errors.emailId && (
-                            <div class="invalid-feedback">
-                                {errors.emailId.message}
-                            </div>
+                <FormProvider {...methods}>
+                    <form onSubmit={methods.handleSubmit(onSubmitLoginHandler)}>
+                        <h1 className="h3 mb-3 fw-normal">Login</h1>
+                        <div className="form-floating mb-2">
+                            <InputElement
+                                type={'email'}
+                                name={'emailId'}
+                                placeholder={'name@example.com'}
+                                headerLabelText={"Email address"}
+                            />
+                        </div>
+                        <div className="form-floating mb-2">
+                            <InputElement
+                                type={'password'}
+                                name={'password'}
+                                placeholder={'Password'}
+                                headerLabelText={"Password"}
+                            />
+                        </div>
+                        <button
+                            className={`w-100 btn btn-lg  login-button `}
+                            type="submit"
+                        >
+                            {methods.formState.isSubmitting
+                                ? 'Loading....'
+                                : 'Sign in'}
+                        </button>
+                        {!hasAccount && (
+                            <p className="has-account">
+                                You Dont have account with us. Please&nbsp;
+                                <Link to={'/signup'}>Sign Up</Link>
+                            </p>
                         )}
-                        <label htmlFor="floatingInput">Email address</label>
-                    </div>
-                    <div className="form-floating mb-2">
-                        <input
-                            type="password"
-                            className={`form-control m-0 ${
-                                errors.password ? 'is-invalid' : ''
-                            }`}
-                            id="password"
-                            placeholder="Password"
-                            {...register('password')}
-                        />
-                        {errors.password && (
-                            <div class="invalid-feedback">
-                                {errors.password.message}
-                            </div>
+                        {!intoDashboardLoginForm && hasAccount && (
+                            <p className="has-account">
+                                Don't have an account?&nbsp;
+                                <Link to={'/signup'}>Sign Up</Link>
+                            </p>
                         )}
-                        <label htmlFor="floatingPassword">Password</label>
-                    </div>
-
-                    <button
-                        className={`w-100 btn btn-lg  login-button `}
-                        type="submit"
-                    >
-                        {isSubmitting ? 'Loading....' : 'Sign in'}
-                    </button>
-                    {!hasAccount && (
-                        <p className="has-account">
-                            You Dont have account with us. Please&nbsp;<Link to={'/signup'}>Sign Up</Link>
-                        </p>
-                    )}
-                    {!intoDashboardLoginForm && hasAccount && (
-                        <p className="has-account">
-                            Don't have an account?&nbsp;
-                            <Link to={'/signup'}>Sign Up</Link>
-                        </p>
-                    )}
-                </form>
+                    </form>
+                </FormProvider>
             </main>
-            {Object.keys(formData)?.length > 0 && !isSubmitting && (
-                <div className="form-signin container bg-body rounded shadow-lg mt-4 pt-4 pb-4 ">
-                    <h1>Form Data</h1>
-                    <pre>{JSON.stringify(formData, null, 2)}</pre>
-                </div>
-            )}
+            {Object.keys(formData)?.length > 0 &&
+                !methods.formState.isSubmitting && (
+                    <div className="form-signin container bg-body rounded shadow-lg mt-4 pt-4 pb-4 ">
+                        <h1>Form Data</h1>
+                        <pre>{JSON.stringify(formData, null, 2)}</pre>
+                    </div>
+                )}
         </>
     );
 };
+
+function InputElement({ type, name, placeholder, headerLabelText }) {
+    const {
+        register,
+        formState: { errors }
+    } = useFormContext();
+    return (
+        <>
+            <input
+                type={type}
+                className={`form-control ${errors[name] ? 'is-invalid' : ''}`}
+                id={name}
+                placeholder={placeholder}
+                {...register(name)}
+            />
+            {errors[name] && (
+                <div class="invalid-feedback">{errors[name].message}</div>
+            )}
+            <label htmlFor="floatingInput">{headerLabelText}</label>
+        </>
+    );
+}
 
 export default Login;
