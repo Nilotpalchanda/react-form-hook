@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/react-form-hook/static/css/main.50b78772.css",
-    "main.js": "/react-form-hook/static/js/main.7ea1d7dc.js",
+    "main.js": "/react-form-hook/static/js/main.d2d061c2.js",
     "static/css/115.67334598.chunk.css": "/react-form-hook/static/css/115.67334598.chunk.css",
     "static/js/115.b2c0b4ff.chunk.js": "/react-form-hook/static/js/115.b2c0b4ff.chunk.js",
     "static/css/886.2d5123de.chunk.css": "/react-form-hook/static/css/886.2d5123de.chunk.css",
-    "static/js/886.97fadcd5.chunk.js": "/react-form-hook/static/js/886.97fadcd5.chunk.js",
+    "static/js/886.b64b7a54.chunk.js": "/react-form-hook/static/js/886.b64b7a54.chunk.js",
     "static/css/15.31d6cfe0.chunk.css": "/react-form-hook/static/css/15.31d6cfe0.chunk.css",
     "static/js/15.72bb16a2.chunk.js": "/react-form-hook/static/js/15.72bb16a2.chunk.js",
     "static/css/380.905e7494.chunk.css": "/react-form-hook/static/css/380.905e7494.chunk.css",
@@ -20,11 +20,11 @@
     "static/js/729.1d6ee237.chunk.js": "/react-form-hook/static/js/729.1d6ee237.chunk.js",
     "index.html": "/react-form-hook/index.html",
     "main.50b78772.css.map": "/react-form-hook/static/css/main.50b78772.css.map",
-    "main.7ea1d7dc.js.map": "/react-form-hook/static/js/main.7ea1d7dc.js.map",
+    "main.d2d061c2.js.map": "/react-form-hook/static/js/main.d2d061c2.js.map",
     "115.67334598.chunk.css.map": "/react-form-hook/static/css/115.67334598.chunk.css.map",
     "115.b2c0b4ff.chunk.js.map": "/react-form-hook/static/js/115.b2c0b4ff.chunk.js.map",
     "886.2d5123de.chunk.css.map": "/react-form-hook/static/css/886.2d5123de.chunk.css.map",
-    "886.97fadcd5.chunk.js.map": "/react-form-hook/static/js/886.97fadcd5.chunk.js.map",
+    "886.b64b7a54.chunk.js.map": "/react-form-hook/static/js/886.b64b7a54.chunk.js.map",
     "15.72bb16a2.chunk.js.map": "/react-form-hook/static/js/15.72bb16a2.chunk.js.map",
     "380.905e7494.chunk.css.map": "/react-form-hook/static/css/380.905e7494.chunk.css.map",
     "380.f41d7f75.chunk.js.map": "/react-form-hook/static/js/380.f41d7f75.chunk.js.map",
@@ -39,6 +39,6 @@
   },
   "entrypoints": [
     "static/css/main.50b78772.css",
-    "static/js/main.7ea1d7dc.js"
+    "static/js/main.d2d061c2.js"
   ]
 }
