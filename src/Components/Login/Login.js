@@ -54,13 +54,12 @@ const Login = () => {
             ) {
                 await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
                 complete();
-                loadingCompleted &&
-                    navigate('/dashboard', {
-                        state: {
-                            userName: loginData.data.fullName,
-                            emailId: loginData.data.emailId
-                        }
-                    });
+                navigate('/dashboard', {
+                    state: {
+                        userName: loginData.data.fullName,
+                        emailId: loginData.data.emailId
+                    }
+                });
             } else {
                 setHasAccount(false);
             }
