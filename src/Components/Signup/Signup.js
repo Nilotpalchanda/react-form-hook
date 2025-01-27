@@ -29,8 +29,9 @@ const Signup = () => {
 
     React.useEffect(() => {
         document.title = 'React Forms Hook Signup';
-        if (location.pathname === '/dashboard/4') {
+        if (location.pathname === '/dashboard/5') {
             document.getElementsByTagName('body')[0].style.display = 'inherit';
+            document.getElementsByTagName('body')[0].style.paddingTop = '40px';
         } else {
             document.getElementsByTagName('body')[0].style.display = 'flex';
         }
@@ -46,7 +47,7 @@ const Signup = () => {
 
     async function onSubmitHandler(data) {
         await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
-        if (location.pathname === '/dashboard/4') {
+        if (location.pathname === '/dashboard/5') {
             setFormData(data);
             return;
         }

@@ -100,3 +100,14 @@ export async function getDynamicFormData() {
         }, 1000);
     });
 }
+
+export const formInputFields = [
+    'text',
+    'email',
+    'password',
+    'number',
+    'color',
+    'range',
+    'file',
+    'search'
+];

@@ -17,13 +17,15 @@ const schema = yup.object().shape({
 const Login = () => {
     const [loginData, setLoginData] = React.useState({});
     const [formData, setFormData] = React.useState({});
+    const [hasAccount, setHasAccount]= React.useState(true)
     const navigate = useNavigate();
     const location = useLocation();
-
+    const intoDashboardLoginForm = location.pathname === '/dashboard/4';
     React.useEffect(() => {
         document.title = 'React Forms Hook Login';
-        if (location.pathname === '/dashboard/3') {
+        if (intoDashboardLoginForm) {
             document.getElementsByTagName('body')[0].style.display = 'inherit';
+            document.getElementsByTagName('body')[0].style.paddingTop = '40px';
         } else {
             document.getElementsByTagName('body')[0].style.display = 'flex';
         }
@@ -40,7 +42,7 @@ const Login = () => {
     });
 
     async function onSubmitLoginHandler(data) {
-        if (location.pathname === '/dashboard/3') {
+        if (intoDashboardLoginForm) {
             setFormData(data);
             return;
         }
@@ -56,6 +58,8 @@ const Login = () => {
                         emailId: loginData.data.emailId
                     }
                 });
+            }else {
+                setHasAccount(false)
             }
         }
     }
@@ -106,9 +110,17 @@ const Login = () => {
                     >
                         {isSubmitting ? 'Loading....' : 'Sign in'}
                     </button>
+                    {!hasAccount && (
                         <p className="has-account">
-                            Don't have an account?&nbsp;<Link to={'/signup'}>Sign Up</Link>
+                            You Dont have account with us. Please&nbsp;<Link to={'/signup'}>Sign Up</Link>
                         </p>
+                    )}
+                    {!intoDashboardLoginForm && hasAccount && (
+                        <p className="has-account">
+                            Don't have an account?&nbsp;
+                            <Link to={'/signup'}>Sign Up</Link>
+                        </p>
+                    )}
                 </form>
             </main>
             {Object.keys(formData)?.length > 0 && !isSubmitting && (

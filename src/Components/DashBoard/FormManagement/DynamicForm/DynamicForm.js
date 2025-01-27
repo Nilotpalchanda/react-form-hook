@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import './DynamicForm.css';
-import { getDynamicFormData } from './DynamicFormData';
+import { getDynamicFormData, formInputFields } from './DynamicFormData';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 
 const DynamicForm = () => {
     const [dynamicData, setDynamicData] = React.useState([]);
     const [formState, setFormState] = React.useState({});
-
     useEffect(() => {
-        document.title = 'Dynamic Form';
+        document.title = 'Dynamic Form with JSON Data';
         document.getElementsByTagName('body')[0].style.display = 'inherit';
         getDynamicFormData().then((res) => setDynamicData(res));
     }, []);
@@ -17,20 +16,10 @@ const DynamicForm = () => {
     const onSubmit = async (data) => {
         await new Promise((r) => setTimeout(r, 1000)); // Simulate API call
         setFormState(data);
-        console.log(data)
     };
 
     const getFiledBasedOnType = (field) => {
-        if (
-            field.type === 'text' ||
-            field.type === 'email' ||
-            field.type === 'password' ||
-            field.type === 'number' ||
-            field.type === 'color' ||
-            field.type === 'range' ||
-            field.type === 'file' ||
-            field.type === 'search'
-        ) {
+        if (formInputFields.includes(field.type)) {
             return <InputField field={field} />;
         } else if (field.type === 'select') {
             return <SelectField field={field} />;
@@ -44,7 +33,14 @@ const DynamicForm = () => {
     };
     return (
         <>
-            <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 dynamic-form-div">
+            <div
+                className={`container bg-body rounded shadow-lg mt-4 pt-4 pb-4 ${
+                    Object.keys(formState)?.length > 0 &&
+                    !methods.formState.isSubmitting
+                        ? 'dynamic-form-div-with-result'
+                        : 'dynamic-form-div'
+                }`}
+            >
                 <div className="container">
                     <FormProvider {...methods}>
                         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -74,7 +70,10 @@ const DynamicForm = () => {
                                     </>
                                 );
                             })}
-                            <button className="btn btn-primary sumbit-dynamic-button" type="submit">
+                            <button
+                                className="btn btn-primary sumbit-dynamic-button"
+                                type="submit"
+                            >
                                 {methods.formState.isSubmitting
                                     ? 'Submitting....'
                                     : 'Submit'}
@@ -97,7 +96,7 @@ function InputField({ field }) {
     const {
         register,
         formState: { errors }
-    } = useFormContext(); 
+    } = useFormContext();
     return (
         <>
             <input
@@ -130,7 +129,7 @@ function SelectField({ field }) {
     const {
         register,
         formState: { errors }
-    } = useFormContext(); 
+    } = useFormContext();
     return (
         <>
             <select
@@ -160,7 +159,7 @@ function TextAreaField({ field }) {
     const {
         register,
         formState: { errors }
-    } = useFormContext(); 
+    } = useFormContext();
     return (
         <>
             <textarea
@@ -189,7 +188,7 @@ function CheckboxField({ field }) {
     const {
         register,
         formState: { errors }
-    } = useFormContext(); 
+    } = useFormContext();
     return (
         <div className="custom-control custom-checkbox">
             <input

@@ -11,7 +11,9 @@ const HealthForm = React.lazy(() =>
 const TabForm = React.lazy(() =>
     import('./Components/DashBoard/FormManagement/TabForm/TabForm')
 );
-const DynamicForm = React.lazy(() => import('./Components/DashBoard/FormManagement/DynamicForm/DynamicForm'));
+const DynamicForm = React.lazy(() =>
+    import('./Components/DashBoard/FormManagement/DynamicForm/DynamicForm')
+);
 
 function App() {
     return (
@@ -30,9 +32,9 @@ function App() {
                         <Route index element={<DashBoard />} />
                         <Route path="1" element={<HealthForm />} />
                         <Route path="2" element={<TabForm />} />
-                        <Route path="3" element={<Login />} />
-                        <Route path="4" element={<Signup />} />
-                        <Route path="5" element={<DynamicForm />}/>
+                        <Route path="3" element={<DynamicForm />} />
+                        <Route path="4" element={<Login />} />
+                        <Route path="5" element={<Signup />} />
                     </Route>
                 </Route>
             </Routes>

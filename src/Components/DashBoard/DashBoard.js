@@ -7,20 +7,21 @@ const DashBoard = () => {
     React.useEffect(() => {
         document.title = 'React Forms Dashboard';
         document.getElementsByTagName('body')[0].style.display = 'inherit';
+        document.getElementsByTagName('body')[0].style.paddingTop = 'unset';
     }, []);
-    
+
     const [formList] = React.useState([
         { id: '1', cardName: 'Health Insurance Enrollment Form with Yup' },
         { id: '2', cardName: 'Tab Form with zod' },
-        { id: '3', cardName: 'Login Form with Yup' },
-        { id: '4', cardName: 'Sigup Form with Zod' },
-        { id: '5', cardName: 'Dynamic Form (JSON Data)' },
+        { id: '3', cardName: 'Dynamic Form (JSON Data)' },
+        { id: '4', cardName: 'Login Form with Yup' },
+        { id: '5', cardName: 'Sigup Form with Zod' }
     ]);
 
     function onClickCard(data) {
         navigate(`/dashboard/${data.id}`);
     }
-    
+
     return (
         <div>
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
