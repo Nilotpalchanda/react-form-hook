@@ -22,7 +22,7 @@ const Signup = () => {
         } else {
             document.getElementsByTagName('body')[0].style.display = 'flex';
         }
-    }, []);
+    }, [location.pathname]);
 
     const methods = useForm({
         resolver: zodResolver(SignUpSchema)

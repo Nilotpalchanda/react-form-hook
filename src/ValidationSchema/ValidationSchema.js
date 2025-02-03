@@ -53,7 +53,7 @@ export const HealthFormSchema = yup.object().shape({
             streetAddress: yup.string().required('Street Address is required'),
             city: yup.string().required('City is required'),
             region: yup.string().required('Region is required'),
-            postalCode: yup.string().required('Postal Code is required')
+            postalCode: yup.string().required('Postal Code is required').matches(/^[0-9]+$/, 'Must be only digits')
         })
     )
 });

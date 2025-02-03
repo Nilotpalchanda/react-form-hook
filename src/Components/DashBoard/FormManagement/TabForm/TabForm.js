@@ -281,14 +281,12 @@ const TabForm = () => {
                     </TabPanel>
                 </Tabs>
             </div>
-            {Object.keys(formState)?.length > 0 &&
-                !isSubmitting &&
-                loadingCompleted && (
-                    <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 tab-form-data">
-                        <h1>Form Data</h1>
-                        <pre>{JSON.stringify(formState, null, 2)}</pre>
-                    </div>
-                )}
+            {!isSubmitting && loadingCompleted && (
+                <div className="container bg-body rounded shadow-lg mt-4 pt-4 pb-4 tab-form-data">
+                    <h1>Form Data</h1>
+                    <pre>{JSON.stringify(formState, null, 2)}</pre>
+                </div>
+            )}
         </>
     );
 };
